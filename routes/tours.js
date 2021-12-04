@@ -17,6 +17,9 @@ router
   .patch(tourController.patchReq)
   .get(tourController.getSingleData)
   .put(tourController.putReq);
-router.route('/').get(tourController.getAllreq).post(tourController.postReq);
+router
+  .route('/')
+  .get(tourController.getAllreq)
+  .post(tourController.checkBody, tourController.postReq);
 
 module.exports = router;

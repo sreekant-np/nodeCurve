@@ -10,7 +10,15 @@ exports.checkId = (req, res, next, val) => {
   if (id > tours.length) {
     res.send('Invalid id');
   }
-  next(); 
+  next();
+};
+
+exports.checkBody = (req, res, next) => {
+  const body = req.body;
+  if (!body.name) {
+    res.send('Name should be included');
+  }
+  next();
 };
 
 //-------------------GET ALL DATA
@@ -35,7 +43,7 @@ exports.postReq = (req, res) => {
   const newTour = Object.assign({ id: newId }, req.body);
   tours.push(newTour);
   fs.writeFile(
-    `${__dirname}/dev-data/data/tours-simple.json`,
+    `${__dirname}/../dev-data/data/tours-simple.json`,
     JSON.stringify(tours),
     (err) => {
       if (err) {
